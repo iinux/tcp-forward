@@ -1,0 +1,20 @@
+package conf
+
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/iinux/tcp-forward/util"
+)
+
+var ListenPort = "1081"
+var RemoteHost = "127.0.0.1"
+var RemotePort = "1080"
+var HttpPort = ":1082"
+var WhitelistFile = "whitelist.txt"
+
+var Account = gin.Accounts{
+	"foo":"xo",
+}
+
+var Container util.Container
+
+
