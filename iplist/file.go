@@ -14,7 +14,7 @@ type File struct {
 }
 
 func NewFile(filename string) *File {
-	fi, err := os.Open(filename)
+	fi, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		fmt.Printf("Error: %s\n", err)
 		return nil
@@ -31,9 +31,9 @@ func NewFile(filename string) *File {
 			break
 		}
 		ip := string(a)
-		fmt.Println(ip)
 		ret.ips = append(ret.ips, ip)
 	}
+	fmt.Println("ips: ", ret.ips)
 
 	return &ret
 }
@@ -44,7 +44,8 @@ func (s *File) GetIpSet() []string {
 
 func (s *File) AddIp(ip string) bool {
 	wr := bufio.NewWriter(s.fd)
-	wr.WriteString(ip)
+	wr.WriteString(ip+"\n")
 	wr.Flush()
+	fmt.Println("write ", ip, " success")
 	return true
 }

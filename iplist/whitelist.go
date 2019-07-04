@@ -25,5 +25,6 @@ func (w *WhiteList) Allow(ip string) bool {
 }
 
 func (w *WhiteList) AddIp(ip string) bool {
+	w.ipSet = append(w.ipSet, ip)
 	return w.ipSetAdapter.AddIp(ip)
 }
